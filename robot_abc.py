@@ -10,8 +10,8 @@ class RobotABC(ABC):
               "Chauffeur": 0}
 
     def __init__(self):
-        self.battery = 100
-        self.condition = 100
+        self._battery = 100
+        self._condition = 100
         self.performed_tasks = 0
         for k, v in self.__class__.robots.items():
             if self.__class__.__name__ == k:
@@ -37,43 +37,45 @@ class RobotABC(ABC):
 
     @property
     def battery(self) -> int:
-        return self.battery
+        return self._battery
 
     @battery.setter
     def battery(self, battery: int):
-        if self.battery < 0:
-            self.battery = 0
-        elif self.battery > 100:
-            self.battery = 100
+        if self._battery < 0:
+            self._battery = 0
+        elif self._battery > 100:
+            self._battery = 100
         else:
-            self.battery = battery
+            self._battery = battery
 
     @battery.deleter
     def battery(self):
-        del self.battery
+        del self._battery
 
     @property
     def condition(self):
-        return self.condition
+        return self._condition
 
     @condition.setter
     def condition(self, condition: int):
         if condition < 0:
-            self.condition = 0
+            self._condition = 0
         elif condition > 100:
-            self.condition = 100
+            self._condition = 100
         else:
-            self.condition = condition
+            self._condition = condition
 
     @condition.deleter
     def condition(self):
-        del self.condition
+        del self._condition
 
     def recharge(self):
-        self.condition += 25
+        self._condition += 25
+        print(f"Robot recharged to {self._battery}% battery.")
 
     def repair(self):
-        self.condition += 30
+        self._condition += 30
+        print(f"Robot recharged to {self._condition}% condition.")
 
     def scrap(self):
         print(f"{self.__class__.__name__} robot permanently scrapped.")

@@ -28,6 +28,11 @@ class Dishwasher(RobotABC):
 
     def status(self) -> bool:
         print(f"Battery Level: {self.battery}\n"
-              f"Condition: {self.condition}"
+              f"Condition: {self.condition}\n"
               f"Performed task(s): {self.performed_tasks}")
         return True
+
+if __name__ == "__main__":
+    dishwasher = Dishwasher()
+    dishwasher.perform_task()
+    dishwasher.status()

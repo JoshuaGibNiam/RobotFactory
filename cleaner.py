@@ -4,8 +4,6 @@ import time
 
 class Cleaner(RobotABC):
     def perform_task(self) -> bool:
-
-
         if self.battery <= 10:
             print("Insufficient battery.")
             return False
@@ -34,3 +32,8 @@ class Cleaner(RobotABC):
         return True
 
 
+if __name__ == "__main__":
+    cleaner = Cleaner()
+    cleaner.perform_task()
+    cleaner.status()
+    cleaner.recharge()
