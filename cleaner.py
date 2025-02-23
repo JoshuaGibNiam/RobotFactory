@@ -34,6 +34,5 @@ class Cleaner(RobotABC):
 
 if __name__ == "__main__":
     cleaner = Cleaner()
-    cleaner.perform_task()
-    cleaner.status()
+    
     cleaner.recharge()

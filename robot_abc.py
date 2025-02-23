@@ -8,7 +8,7 @@ class RobotABC(ABC):
               "Dishwasher": 0,
               "Cooker": 0,
               "Chauffeur": 0}
-
+    robots_list = {}
     def __init__(self):
         self._battery = 100
         self._condition = 100
@@ -21,8 +21,10 @@ class RobotABC(ABC):
 
 
 
+
+
     @abstractmethod
-    def perform_task(self):
+    def perform_task(self) -> bool:
         """
         Ensures battery and condition is sufficient to perform task
         Returns True if task is performed, False otherwise
@@ -30,7 +32,7 @@ class RobotABC(ABC):
         pass
 
     @abstractmethod
-    def status(self):
+    def status(self) -> bool:
         """Prints robot status: battery, performed tasks
          and condition and returns True"""
         pass
@@ -69,21 +71,24 @@ class RobotABC(ABC):
     def condition(self):
         del self._condition
 
-    def recharge(self):
-        self._condition += 25
+    def recharge(self) -> None:
+        """Recharges itself at 25% battery per charge"""
+        self.condition += 25
         print(f"Robot recharged to {self._battery}% battery.")
 
-    def repair(self):
-        self._condition += 30
+    def repair(self) -> None:
+        """Repairs 30% of condition"""
+        self.condition += 30
         print(f"Robot recharged to {self._condition}% condition.")
 
-    def scrap(self):
+    def scrap(self) -> None:
+        """Delete the robot permanetly"""
         print(f"{self.__class__.__name__} robot permanently scrapped.")
         del self.battery
         del self.condition
         self.__class__.robots[self.__class__.__name__] -= 1
 
-    def take_damage(self):
+    def take_damage(self) -> None:
         """Creates a slim chance where a robot will take damage.
         Condition will be affected. If condition < 0, robot will be scrapped"""
         chance = randint(1, 100)
@@ -93,5 +98,6 @@ class RobotABC(ABC):
         if self.condition <= 0:
             self.scrap()
 
-    def active_robots(self):
+    def active_robots(self) -> None:
+        """Prints all the active robots."""
         print(f"Current active robots: {self.__class__.robots}")
