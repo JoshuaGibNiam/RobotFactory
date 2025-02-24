@@ -70,7 +70,7 @@ class RobotABC(ABC):
         print(f"Robot recharged to {self._condition}% condition.")
 
     def scrap(self) -> None:
-        """Delete the robot permanetly"""
+        """Delete the robot permanently"""
         print(f"{self.__class__.__name__} robot permanently scrapped.")
         del self.battery
         del self.condition
@@ -86,6 +86,3 @@ class RobotABC(ABC):
         if self.condition <= 0:
             self.scrap()
 
-    def active_robots(self) -> None:
-        """Prints all the active robots."""
-        print(f"Current active robots: {self.__class__.robots}")

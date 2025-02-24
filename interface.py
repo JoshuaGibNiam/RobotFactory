@@ -6,7 +6,7 @@ from dishwasher import *
 from robot_abc import *
 
 class Interface:
-    def display_main_menu(self):
+    def display_main_menu(self) -> None:
         print("Welcome to the main menu!")
         print("Enter number to choose your next action:\n"
               "1. Create a Robot\n"
@@ -14,8 +14,8 @@ class Interface:
               "3. Access a robot \n"
               "4. Scrap a robot \n"
               "5. Exit")
-    def handle_main_menu(self):
-        """Handle main menu actions"""
+    def handle_main_menu(self) -> bool:
+        """Handle main menu actions, returns True to all unless user wants to exit"""
         action = input("What would you like to do?(1-5): ")
         while action not in ["1", "2", "3", "4", "5"]:
             action = input("Invalid input. What would you like to do?(1-4): ")
@@ -57,19 +57,46 @@ class Interface:
                 print("Maximum amount of robots reached. Scrap one to create a new one!")
             else:
                 print("Robot successfully created!")
-
+            return True
         elif action == 2:
             """Prints all available robots"""
             for k, v in RobotABC.robots.items():
                 print(f"{k}: {v.__class__.__name__ if v.__class__.__name__ != "NoneType" else 'Void'}")
-
+            return True
         elif action == 3:
-            pass
+            for k, v in RobotABC.robots.items():
+                print(f"{k}: {v.__class__.__name__ if v.__class__.__name__ != "NoneType" else 'Void'}")
+            input_robot = input("Which robot would you like to access?(1-5):")
+            while input_robot not in ["1", "2", "3", "4", "5"]:
+                input("Invalid input. What robot would you like to access?(1-5): ")
+            input_robot = RobotABC.robots["Robot " + input_robot]
+            action = input("What would you like to do?:\n "
+                           "1. Perform Task\n"
+                           "2. Show Status\n")
+            while action not in ["1", "2"]:
+                action = input("Invalid input. What robot would you like to access?(1-5): ")
+            if action == "1":
+                input_robot.perform_task()
+            elif action == "2":
+                input_robot.status()
+            return True
 
-if __name__ == "__main__":
-    i = Interface()
-    i.display_main_menu()
-    i.handle_main_menu()
-    i.handle_main_menu()
+        elif action == 4:
+            for k, v in RobotABC.robots.items():
+                print(f"{k}: {v.__class__.__name__ if v.__class__.__name__ != "NoneType" else "None"}")
+            input_robot = input("Which robot would you like to scrap?(1-5):")
+            while input_robot not in ["1", "2", "3", "4", "5"]:
+                input("Invalid input. What robot would you like to scrap?(1-5): ")
+            input_robot = RobotABC.robots["Robot " + input_robot]
+            input_robot.scrap()
+            return True
+
+        else:
+            print("Exiting Program...")
+            return False
+
+
+
+
 
 
