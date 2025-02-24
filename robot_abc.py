@@ -3,24 +3,12 @@ from random import randint
 
 
 class RobotABC(ABC):
-    robots = {"Cleaner": 0,
-              "Deliverer": 0,
-              "Dishwasher": 0,
-              "Cooker": 0,
-              "Chauffeur": 0}
-    robots_list = {}
+    robots = {"Robot 1": None, "Robot 2": None, "Robot 3": None,
+              "Robot 4": None, "Robot 5": None}
     def __init__(self):
         self._battery = 100
         self._condition = 100
         self.performed_tasks = 0
-        for k, v in self.__class__.robots.items():
-            if self.__class__.__name__ == k:
-                self.robots[k] += 1
-
-
-
-
-
 
 
     @abstractmethod
