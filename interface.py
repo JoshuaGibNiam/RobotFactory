@@ -33,9 +33,9 @@ class Interface:
             while robot not in ["1", "2", "3", "4", "5"]:
                 robot = input("Invalid input. What robot would you like to create?(1-5): ")
             robot = int(robot)
-            count = 0
-            for bot in RobotABC.robots:
-                if bot != None:
+            count = 5
+            for bot in RobotABC.robots.keys():
+                if RobotABC.robots[bot] is None:
                     if robot == 1:
                         RobotABC.robots[bot] = Chauffeur()
                         break
@@ -51,9 +51,9 @@ class Interface:
                     elif robot == 5:
                         RobotABC.robots[bot] = Cleaner()
                         break
-                    else:
-                        count += 1
-            if count == 5:
+                else:
+                    count -= 1
+            if count == 0:
                 print("Maximum amount of robots reached. Scrap one to create a new one!")
             else:
                 print("Robot successfully created!")
@@ -70,15 +70,26 @@ class Interface:
             while input_robot not in ["1", "2", "3", "4", "5"]:
                 input("Invalid input. What robot would you like to access?(1-5): ")
             input_robot = RobotABC.robots["Robot " + input_robot]
+            if input_robot is None:
+                print("Robot does not exists!")
+                return True
             action = input("What would you like to do?:\n "
                            "1. Perform Task\n"
-                           "2. Show Status\n")
-            while action not in ["1", "2"]:
-                action = input("Invalid input. What robot would you like to access?(1-5): ")
-            if action == "1":
+                           "2. Show Status\n"
+                           "3. Recharge \n"
+                           "4. Repair \n"
+                           ": ")
+            while action.strip() not in ["1", "2", "3", "4"]:
+                action = input("Invalid input. What would you like to do?(1-2): ")
+
+            if action.strip() == "1":
                 input_robot.perform_task()
-            elif action == "2":
+            elif action.strip() == "2":
                 input_robot.status()
+            elif action.strip() == "3":
+                input_robot.recharge()
+            elif action.strip() == "4":
+                input_robot.repair()
             return True
 
         elif action == 4:
@@ -96,6 +107,10 @@ class Interface:
             return False
 
 
+if __name__ == "__main__":
+    i = Interface()
+    i.handle_main_menu()
+    i.handle_main_menu()
 
 
 

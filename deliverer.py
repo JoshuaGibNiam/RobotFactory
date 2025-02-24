@@ -24,7 +24,7 @@ class Deliverer(RobotABC):
         return True
 
     def status(self) -> bool:
-        print(f"Current battery level: {self.battery}"
-              f"Current condition: {self.condition}"
-              f"Performed task(s): {self.perform_task()}")
+        print(f"Current battery level: {self.battery}\n"
+              f"Current condition: {self.condition}\n"
+              f"Performed task(s): {self.performed_tasks}\n")
         return True

@@ -27,7 +27,7 @@ class Cleaner(RobotABC):
 
     def status(self) -> bool:
         print(f"Battery Level: {self.battery}\n"
-              f"Condition: {self.condition}"
+              f"Condition: {self.condition}\n"
               f"Performed task(s): {self.performed_tasks}")
         return True
 

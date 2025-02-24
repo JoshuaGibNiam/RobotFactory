@@ -74,7 +74,11 @@ class RobotABC(ABC):
         print(f"{self.__class__.__name__} robot permanently scrapped.")
         del self.battery
         del self.condition
-        self.__class__.robots[self.__class__.__name__] -= 1
+        for k, v in self.robots.items():
+            if v == self:
+                self.robots[k] = None
+                break
+
 
     def take_damage(self) -> None:
         """Creates a slim chance where a robot will take damage.

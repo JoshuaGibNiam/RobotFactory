@@ -15,7 +15,7 @@ class Cooker(RobotABC):
             print(".", end="")
         print()
         time.sleep(1.2)
-        print("Cooking complete.")
+        print("Cooking complete. Here's your dish!")
         self.take_damage()
         self.battery -= 5
         self.condition -= 10
@@ -25,7 +25,9 @@ class Cooker(RobotABC):
         return True
 
     def status(self) -> bool:
-        print(f"Current battery level: {self.battery}"
-              f"Current condition: {self.condition}"
-              f"Performed task(s): {self.perform_task()}")
+        print(f"Current battery level: {self.battery}\n"
+              f"Current condition: {self.condition}\n"
+              f"Performed task(s): {self.performed_tasks}\n")
         return True
+
+
