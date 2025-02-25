@@ -1,11 +1,48 @@
-from chaffeur import *
+from chauffeur import *
 from cleaner import *
 from cooker import *
 from deliverer import *
 from dishwasher import *
 from robot_abc import *
-
+import os
+import json
 class Interface:
+    def __init__(self):
+      pass
+
+    # Mapping of robot types to their classes
+    ROBOT_CLASSES = {"Chauffeur": Chauffeur,
+                     "Cleaner": Cleaner,
+                     "Cooker": Cooker,
+                     "Deliverer": Deliverer,
+                     "Dishwasher": Dishwasher}
+
+    def load(self):
+        path = "robots.json"
+        if os.path.exists(path):
+            with open(path, "r") as file:
+                RobotABC.robots = json.load(file)
+                for k, v in RobotABC.robots.items():
+                    if RobotABC.robots[k]:
+                        RobotABC.robots[k] = Interface.ROBOT_CLASSES[v["type"]](v["battery"], v["condition"],
+                                                                            v["performed_tasks"])
+
+        else:
+            with open(path, "w") as file:
+                print("Initializing file...")
+                json.dump({}, file)
+
+    def save(self):
+        # convert robots into savable obj first
+        for k, v in RobotABC.robots.items():
+            if RobotABC.robots[k]:
+                RobotABC.robots[k] = {"type": v.__class__.__name__, "battery": v._battery, "condition": v._condition,
+                                  "performed_tasks": v.performed_tasks}
+        path = "robots.json"
+
+        with open(path, "w") as file:
+            json.dump(RobotABC.robots, file)
+
     def display_main_menu(self) -> None:
         print("Welcome to the main menu!")
         print("Enter number to choose your next action:\n"
@@ -104,14 +141,17 @@ class Interface:
 
         else:
             print("Exiting Program...")
+            self.save()
             return False
 
 
 if __name__ == "__main__":
-    i = Interface()
-    i.handle_main_menu()
-    i.handle_main_menu()
 
+    i = Interface()
+    i.load()
+    i.handle_main_menu()
+    i.handle_main_menu()
+    i.save()
 
 
 

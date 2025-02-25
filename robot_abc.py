@@ -5,10 +5,11 @@ from random import randint
 class RobotABC(ABC):
     robots = {"Robot 1": None, "Robot 2": None, "Robot 3": None,
               "Robot 4": None, "Robot 5": None}
-    def __init__(self):
-        self._battery = 100
-        self._condition = 100
-        self.performed_tasks = 0
+
+    def __init__(self, battery=100, condition=100, performed_tasks=0):
+        self._battery = battery
+        self._condition = condition
+        self.performed_tasks = performed_tasks
 
 
     @abstractmethod

@@ -1,6 +1,7 @@
 from interface import *
 def run():
     i = Interface()
+    i.load()
     while True:
         i.display_main_menu()
         truefalse = i.handle_main_menu()

@@ -1,0 +1,1 @@
+{"Robot 1": {"type": "Cooker", "battery": 100, "condition": 100, "performed_tasks": 0}, "Robot 2": {"type": "Deliverer", "battery": 100, "condition": 100, "performed_tasks": 0}, "Robot 3": null, "Robot 4": null, "Robot 5": null}

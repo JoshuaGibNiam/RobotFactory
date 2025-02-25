@@ -16,13 +16,15 @@ or repair robots, and scrap them when necessary.
 Cleaner. The program will store them automatically. Numbers of robots is capped at 5.
 2. **Access and use a robot**: Perform the following functions:
    - **Perform Tasks**: Each robot has a unique function that consumes battery and/or 
-   affects its condition.
+   affects its condition. Robots *may have a chance of taking damage*.
    - **Show Status**: Show a certain robot's status: battery, condition and tasks performed
    - **Recharge**: Recharge a robot's battery.
    - **Repair**: Repair a robot, improving condition by 30%
 3. **View all robots**: View all active robots.
 4. **Scrap a robot**: Permanently delete a robot if necessary.
-5. **Exit**: Exit the program gracefully.
+5. **Save and Load**: Saves your current robot and their state when you exit the program,
+loading it back after.
+6. **Exit**: Exit the program gracefully, and saves the robots.
 
 ---
 

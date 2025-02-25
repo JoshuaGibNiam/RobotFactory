@@ -22,6 +22,7 @@ class Cooker(RobotABC):
 
         if self.condition <= 0:
             self.scrap()
+        self.performed_tasks += 1
         return True
 
     def status(self) -> bool:
